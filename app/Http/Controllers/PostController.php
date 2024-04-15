@@ -32,8 +32,8 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        post::create($request->all());
-        return redirect()->route ('posts.index')->with('success','Post created successfully') ;
+        post::create($request->validated());
+        return redirect()->route ('posts.index')->with('success','Post created successfully');
     }
 
     /**
@@ -41,7 +41,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view ('posts.show', compact('post'));
+    return view ('posts.show',compact('post'));
     }
 
     /**
@@ -49,22 +49,38 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Post $post, Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3|max:155',
+            'content' => 'required|min:3',
+            'category_id'=> 'required'
+            // Agrega aquí más campos según sea necesario
+        ]);
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+
+        $post->save();
+
+        return redirect()->route('posts.index')->with('success','Post updated successfully');
+
     }
 
-    /**
+/**
      * Remove the specified resource from storage.
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route ('posts.index')->with('sucess','delete_all');
     }
 }

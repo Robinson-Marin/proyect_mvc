@@ -1,24 +1,24 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
 
     <div class="container">
         <h3>Detalles de categoría</h3>
 
         <div class ="card">
-             <div class="car-body">
-                 {{ $category->id }}
-                 {{ $category->category_name }}
-                 @if ($category->active)
+            <div class="car-body">
+                <h1>{{ $category->id }}</h1>
+                <h1>{{ $category->category_name }}</h1>
+                <h1>{{$category->create}}</h1>
+                @if ($category->active)
                     Activa
-                 @else
+                @else
                     Inactiva
-                 @endif
+                @endif
+                <br><a class="btn btn-primary" hret="{{ route('categories.edit', $category->id) }}">Edit</a>
             </div>
-            <a class="btn btn-primary" hret="{{ route('categories.edit', $category->id) }}">Edit</a>
-            <form action="{{ route('categories.destroy', $category->id) }}" method="post" style=display: inline">
+            <form action="{{ route('categories.destroy', $category->id) }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class=btn btn-danger">Eliminar</button>
             </form>
         </div>
     </div>

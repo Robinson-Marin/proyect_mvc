@@ -4,6 +4,8 @@
 <div class="container">
     <h5>Lista de publicaciones</h5>
     <a href="{{ route('posts.create') }}" class="btn  btn-primary">Crear publicación</a>
+    
+    {{--<a href="{{ route('posts.edit') }}" class="btn  btn-primary">Editar publicacion</a>--}}
     <table class="table">
         <thead>
             <tr>

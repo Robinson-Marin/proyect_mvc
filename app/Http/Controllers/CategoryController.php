@@ -59,11 +59,20 @@ class CategoryController extends Controller
     *@param\Illuminate\Http\Response
      */
 
-
-    public function update(CreateCategoryRequest $request, Category $category)
-    {
-        $category->update($request->validate());
-        return redirect()->route('categories.index')->with('success','Category updated successfully');
+     public function update(Request $request, Category $category)
+     {
+         $request->validate([
+             'category_name'=> 'required|string|max:120',
+             'active' => 'required|boolean'
+             // Agrega aquí más campos según sea necesario
+         ]);
+ 
+         $category->category_name = $request->category_name;
+         $category->active = $request->active;
+ 
+         $category->save();
+ 
+         return redirect()->route('categories.index')->with('success','Category updated successfully');
     }
 
     /**
