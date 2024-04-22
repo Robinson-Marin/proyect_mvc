@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        post::create($request->validated());
+        Post::create($request->validated());
         return redirect()->route ('posts.index')->with('success','Post created successfully');
     }
 

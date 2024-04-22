@@ -19,6 +19,7 @@
             <form action="{{ route('categories.destroy', $category->id) }}">
                 @csrf
                 @method('DELETE')
+                <a href="{{ url()->previous() }}" class="btn btn-secondary">Atrás</a>
             </form>
         </div>
     </div>

@@ -3,7 +3,8 @@
 <div class="container">
     <div class ="card">
         <div class="car-body">
-            <h3>Detalles de categoría</h3><br>
+            <h3>Detalles de categoría</h3>
+            <br>
             <h4>Titulo</h4>
             <p>{{ $post->title }}</p>
             <h4>Contenido</h4>
